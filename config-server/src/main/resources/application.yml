@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: native  # Use local files instead of Git
+  cloud:
+    config:
+      server:
+        native:
+          search-locations:
+            - classpath:/config/      # Looks in src/main/resources/config
+            - file:./config/           # Looks in ./config (project root)
+            - file:${HOME}/config/     # Looks in user home directory
+server:
+  port: 9090
