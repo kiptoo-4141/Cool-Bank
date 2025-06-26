@@ -19,7 +19,7 @@ public record AccountRegistrationRequest(
         @NotNull(message = "User ID is required")
         Long userId
 ) {
-    // Default initial balance if not provided
+    // Default initial balance if isn't provided
     public AccountRegistrationRequest(String accountNumber, AccountType accountType, Long userId) {
         this(accountNumber, accountType, BigDecimal.ZERO, userId);
     }
