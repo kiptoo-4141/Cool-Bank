@@ -1,1 +1,3 @@
 com.kiptoo.cool.bank.api
+
+Mongo : NRLD4fghDSkwwvnh
