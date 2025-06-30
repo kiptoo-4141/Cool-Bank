@@ -32,26 +32,3 @@ public record TransactionRequestDto(
     // Additional helper methods can be added here if needed
 }
 
-// Related DTOs for different transaction operations
-record DepositRequestDto(
-        @NotNull @Positive BigDecimal amount,
-        @NotNull Long accountId,
-        @NotNull Long userId,
-        String description
-) {}
-
-record WithdrawalRequestDto(
-        @NotNull @Positive BigDecimal amount,
-        @NotNull Long accountId,
-        @NotNull Long userId,
-        String description
-) {}
-
-record TransferRequestDto(
-        @NotNull @Positive BigDecimal amount,
-        @NotNull Long sourceAccountId,
-        @NotNull Long destinationAccountId,
-        @NotNull Long userId,
-        String description
-) {}
-

@@ -1,10 +1,7 @@
 package com.kiptoo.cool.bank.api.controller;
 
-import com.kiptoo.cool.bank.api.dtos.TransactionRequestDto;
-import com.kiptoo.cool.bank.api.dtos.TransactionResponseDto;
-import com.kiptoo.cool.bank.api.exception.InsufficientBalanceException;
-import com.kiptoo.cool.bank.api.exception.TransactionException;
-import com.kiptoo.cool.bank.api.model.Transaction;
+import com.kiptoo.cool.bank.api.dtos.*;
+import com.kiptoo.cool.bank.api.exception.*;
 import com.kiptoo.cool.bank.api.service.TransactionService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -24,29 +21,29 @@ public class TransactionController {
     }
 
     @PostMapping("/deposit")
-    public ResponseEntity<Transaction> deposit(@Valid @RequestBody TransactionRequestDto request) throws TransactionException {
-        return ResponseEntity.ok(transactionService.createDeposit(request));
+    public ResponseEntity<TransactionResponseDto> deposit(@Valid @RequestBody DepositRequestDto request) throws TransactionException {
+        return ResponseEntity.ok(transactionService.processDeposit(request));
     }
 
     @PostMapping("/withdraw")
-    public ResponseEntity<Transaction> withdraw(@Valid @RequestBody TransactionRequestDto request) throws TransactionException, InsufficientBalanceException {
-        return ResponseEntity.ok(transactionService.createWithdrawal(request));
+    public ResponseEntity<TransactionResponseDto> withdraw(@Valid @RequestBody WithdrawalRequestDto request) throws TransactionException, InsufficientBalanceException {
+        return ResponseEntity.ok(transactionService.processWithdrawal(request));
     }
 
     @PostMapping("/transfer")
-    public ResponseEntity<TransactionResponseDto> transfer(@Valid @RequestBody TransactionRequestDto request) throws TransactionException, InsufficientBalanceException {
-        return ResponseEntity.ok(TransactionResponseDto.fromTransaction(transactionService.createTransfer(request)));
+    public ResponseEntity<TransactionResponseDto> transfer(@Valid @RequestBody TransferRequestDto request) throws TransactionException, InsufficientBalanceException {
+        return ResponseEntity.ok(transactionService.processTransfer(request));
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Transaction>> getUserTransactions(@PathVariable Long userId) throws TransactionException {
+    public ResponseEntity<List<TransactionResponseDto>> getUserTransactions(@PathVariable Long userId) throws TransactionException {
         return ResponseEntity.ok(transactionService.getUserTransactions(userId));
     }
 
-    @GetMapping("/account/{accountId}")
-    public ResponseEntity<List<TransactionResponseDto>> getAccountTransactions(@PathVariable Long accountId) throws TransactionException {
-        return ResponseEntity.ok(transactionService.getAccountTransactions(accountId));
-    }
+//    @GetMapping("/account/{accountId}")
+//    public ResponseEntity<List<TransactionResponseDto>> getAccountTransactions(@PathVariable Long accountId) throws TransactionException {
+//        return ResponseEntity.ok(transactionService.getAccountTransactions(accountId));
+//    }
 
     @GetMapping("/account/{accountId}/history")
     public ResponseEntity<List<TransactionResponseDto>> getTransactionHistory(
@@ -60,12 +57,5 @@ public class TransactionController {
 //    public ResponseEntity<TransactionResponseDto> getTransactionByReference(
 //            @PathVariable String reference) {
 //        return ResponseEntity.ok(transactionService.getTransactionByReference(reference));
-//    }
-//
-//    @GetMapping("/account/{accountId}/type/{type}")
-//    public ResponseEntity<List<TransactionResponseDto>> getTransactionsByType(
-//            @PathVariable Long accountId,
-//            @PathVariable String type) {
-//        return ResponseEntity.ok(transactionService.getTransactionsByType(accountId, type));
 //    }
 }
