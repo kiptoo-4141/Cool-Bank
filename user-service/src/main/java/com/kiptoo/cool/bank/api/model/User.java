@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.validation.annotation.Validated;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,13 +24,30 @@ public class User {
 
     @Column(name = "first_name")
     private String firstName;
+
     @Column(name = "middle_name")
     private String middleName;
+
     @Column(name = "last_name")
     private String lastName;
-    @Column(name = "email" , unique = true)
+
+    @Column(name = "email", unique = true)
     private String email;
+
     @Column(name = "password")
     private String password;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Account> accounts = new ArrayList<>();
+
+    // Helper method to maintain bidirectional relationship
+    public void addAccount(Account account) {
+        accounts.add(account);
+        account.setUser(this);
+    }
+
+    public void removeAccount(Account account) {
+        accounts.remove(account);
+        account.setUser(null);
+    }
 }
