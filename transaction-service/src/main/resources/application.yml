@@ -1,23 +1,18 @@
 spring:
   application:
-  name: transaction-service
-
+    name: transaction-service
+  config:
+    import: optional:configserver:http://localhost:9090
+  profiles:
+    active: native
+  cloud:
+    config:
+      enabled: true
+      uri: http://localhost:9090
+      fail-fast: false
 
 server:
   port: 9093
-
-  profiles:
-    active: native  # Use local files instead of Git
-  cloud:
-    config:
-      import: configserver:http://localhost:9090
-      server:
-        native:
-          search-locations:
-            - classpath:/config/      # Looks in src/main/resources/config
-            - file:./config/           # Looks in ./config (project root)
-            - file:${HOME}/config/     # Looks in user home directory
-
 
 eureka:
   client:
