@@ -24,6 +24,8 @@ public class AccountController {
 
         AccountRegistrationResponse response = accountService.registerAccount(request);
 
+        System.out.println("Starting Account creation");
+
         // Return the appropriate HTTP status based on response
         if (response.isSuccess()) {
             return ResponseEntity.status(HttpStatus.CREATED).body(response);

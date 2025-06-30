@@ -1,0 +1,27 @@
+spring:
+  application:
+  name: transaction-service
+
+
+server:
+  port: 9093
+
+  profiles:
+    active: native  # Use local files instead of Git
+  cloud:
+    config:
+      import: configserver:http://localhost:9090
+      server:
+        native:
+          search-locations:
+            - classpath:/config/      # Looks in src/main/resources/config
+            - file:./config/           # Looks in ./config (project root)
+            - file:${HOME}/config/     # Looks in user home directory
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    register-with-eureka: false
+    fetch-registry: false
