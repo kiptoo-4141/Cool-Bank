@@ -157,7 +157,3 @@ This project is licensed under the MIT License.
 **Moses Kipngetich Kiptoo**
 [LinkedIn](#) | [GitHub](#)
 
-```
-
-Let me know if you'd like it customized for Docker, Swagger Docs, or include curl request samples.
-```
