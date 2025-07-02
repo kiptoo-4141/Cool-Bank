@@ -1,3 +1,5 @@
 com.kiptoo.cool.bank.api
 
 Mongo : NRLD4fghDSkwwvnh
+
+mongodb://localhost:27017/
