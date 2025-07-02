@@ -1,4 +1,4 @@
-Here's a sample `README.md` file for your **Spring Boot Banking API** microservice project:
+
 
 ---
 
